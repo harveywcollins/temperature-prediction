@@ -6,6 +6,7 @@ library(lubridate)
 
 # Load in the daily temperature
 
+
 url <- "https://raw.githubusercontent.com/harveywcollins/temperature-prediction/refs/heads/main/data/durhamtemp_1901_2019.csv"
 temperature_data <- read.csv(url)
 
@@ -41,6 +42,7 @@ boxplot(temperature_data$Av.temp, main = "Boxplot of Daily Average Temperature",
 
 #renamed dataset for clarity
 cleaned_data <- temperature_data
+cleaned_data <- cleaned_data %>% select(-consistent)
 
 # save as CSV file
 write.csv(cleaned_data, "cleaned_temperature_data.csv", row.names = FALSE)
