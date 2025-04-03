@@ -6,7 +6,6 @@ library(lubridate)
 
 # Load in the daily temperature
 
-
 url <- "https://raw.githubusercontent.com/harveywcollins/temperature-prediction/refs/heads/main/data/durhamtemp_1901_2019.csv"
 temperature_data <- read.csv(url)
 
@@ -17,6 +16,7 @@ summary(temperature_data)
 # Removing rows that have values as NA
 
 temperature_data <- temperature_data[!apply(is.na(temperature_data), 1, all), ]
+temperature_data <- na.omit(temperature_data)
 
 # Convert the date column into a date type
 
