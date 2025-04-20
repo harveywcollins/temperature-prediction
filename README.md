@@ -33,7 +33,7 @@ Steps: Restart R session and run following lines to link R with your virtual env
 
 ```r
 library(reticulate)
-# Set the correct virtual environment path
+# Set the correct virtual environment path e.g.,
 use_virtualenv("C:/vens/r-tensorflow", required = TRUE)
 ```
 
