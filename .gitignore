@@ -1,0 +1,4 @@
+# Ignore large files
+*.RData
+
+.git/objects/
