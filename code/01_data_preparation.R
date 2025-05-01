@@ -13,16 +13,6 @@ head(temperature_data)
 str(temperature_data)
 summary(temperature_data)
 
-# Removing rows that have values as NA
-
-temperature_data <- temperature_data[!apply(is.na(temperature_data), 1, all), ]
-temperature_data <- na.omit(temperature_data)
-
-# Convert the date column into a date type
-
-temperature_data$Date <- dmy(temperature_data$Date)
-str(temperature_data$Date)
-
 # Verify that temperature values are consistent
 
 temperature_data <- temperature_data %>%
@@ -30,6 +20,25 @@ temperature_data <- temperature_data %>%
 
 inconsistencies <- sum(!temperature_data$consistent)
 cat("Number of inconsistent rows (Av.temp not between Tmin and Tmax):",  inconsistencies, "\n")
+
+# Removing rows that have values as NA
+
+na_per_col <- sapply(temperature_data, function(x) sum(is.na(x)))
+print(na_per_col)
+
+rows_with_na <- which(!complete.cases(temperature_data))
+cat("Rows containing at least one NA:\n", rows_with_na, "\n\n")
+
+print( temperature_data[ rows_with_na, ])
+
+temperature_data <- temperature_data[-rows_with_na, ]
+
+sum(!complete.cases(temperature_data))
+
+# Convert the date column into a date type
+
+temperature_data$Date <- dmy(temperature_data$Date)
+str(temperature_data$Date)
 
 # Identify potential outliers
 
